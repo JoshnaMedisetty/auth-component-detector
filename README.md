@@ -36,14 +36,13 @@ auth-component-detector/
 │
 ├── backend/
 │ ├── main.py # FastAPI application
-│ └── scraper.py # Web scraping & authentication detection logic
+│ ├── scraper.py # Web scraping & authentication detection logic
+│ ├── requirements.txt
+│ ├── Procfile # For deployment
+│ └── static/
+│ └── index.html # Frontend UI
 │
-├── frontend/
-│ └── index.html # Simple UI for dynamic URL input
-│
-├── requirements.txt
 └── README.md
-
 ---
 
 ## Setup Instructions (Run Locally)
@@ -69,7 +68,7 @@ venv\Scripts\activate
 
 ### 3. Install Dependencies
 ```bash
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
 ### 4. Run the Backend Server
@@ -96,7 +95,7 @@ This interface allows you to easily test multiple websites dynamically.
 
 ### Option 2: Using the Simple Frontend UI
 
-* Open the file: frontend/index.html
+* Open the file: backend/static/index.html
 * Enter a website URL in the input field.
 * Click Analyze.
 * The detected authentication component (or result message) will be displayed.
@@ -119,11 +118,12 @@ The detection algorithm uses the following heuristics:
 * Falls back to locating standalone password inputs if no form is found
 * Extracts and returns the closest parent HTML block as the authentication component
 
-## Notes
+## Deployment
 
-* Some websites may block scraping or require JavaScript rendering.
-* The solution focuses on static HTML analysis, which covers a majority of login pages.
-* The architecture is modular and easy to extend (e.g., headless browsers, ML-based detection).
+The backend can be deployed to free services like Render or Railway.
+
+After deployment, the frontend will be available at: /static/index.html
+API docs will be available at: /docs
 
 ## Author
 Joshna Medisetty
