@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auth Component Detector</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+        textarea {
+            width: 100%;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Authentication Component Detector</h2>
+
+<input id="urlInput" type="text" placeholder="Enter website URL" style="width:70%">
+<button onclick="analyze()">Analyze</button>
+
+<pre id="result"></pre>
+
+<script>
+async function analyze() {
+    const url = document.getElementById("urlInput").value;
+    const response = await fetch(`http://127.0.0.1:8000/analyze?url=${url}`);
+    const data = await response.json();
+    document.getElementById("result").textContent =
+        JSON.stringify(data, null, 2);
+}
+</script>
+
+</body>
+</html>
