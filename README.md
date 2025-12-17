@@ -50,7 +50,7 @@ auth-component-detector/
 
 ### 1. Clone the Repository
 ```bash
-git clone <your-repository-url>
+git clone <https://github.com/JoshnaMedisetty/auth-component-detector.git>
 cd auth-component-detector 
 
 ```
