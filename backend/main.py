@@ -4,6 +4,8 @@ from scraper import find_auth_component
 
 app = FastAPI(title="Authentication Component Detector")
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
