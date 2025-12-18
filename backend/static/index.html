@@ -1,36 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Auth Component Detector</title>
+    <meta charset="UTF-8">
+    <title>Authentication Component Detector</title>
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             margin: 40px;
+            background-color: #f9f9f9;
         }
-        textarea {
-            width: 100%;
-            height: 250px;
+        h1 {
+            color: #333;
+        }
+        input {
+            width: 70%;
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            margin-left: 10px;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background-color: #eee;
+            padding: 20px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
+    <h1>Authentication Component Detector</h1>
+    <input id="urlInput" type="text" placeholder="Enter website URL">
+    <button onclick="analyze()">Analyze</button>
 
-<h2>Authentication Component Detector</h2>
+    <pre id="result">Results will appear here...</pre>
 
-<input id="urlInput" type="text" placeholder="Enter website URL" style="width:70%">
-<button onclick="analyze()">Analyze</button>
+    <script>
+        async function analyze() {
+            const url = document.getElementById("urlInput").value.trim();
+            if (!url) {
+                alert("Please enter a website URL.");
+                return;
+            }
 
-<pre id="result"></pre>
+            document.getElementById("result").textContent = "Analyzing...";
 
-<script>
-async function analyze() {
-    const url = document.getElementById("urlInput").value;
-    const response = await fetch(`/analyze?url=${encodeURIComponent(url)}`);
-    const data = await response.json();
-    document.getElementById("result").textContent =
-        JSON.stringify(data, null, 2);
-}
-</script>
+            try {
+                // Use relative path so it works both locally and on Render
+                const response = await fetch(`/analyze?url=${encodeURIComponent(url)}`);
+                if (!response.ok) throw new Error("Failed to fetch data from API");
 
+                const data = await response.json();
+                document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+            } catch (err) {
+                document.getElementById("result").textContent = "Error: " + err.message;
+            }
+        }
+    </script>
 </body>
 </html>
