@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .scraper import find_auth_component
+from fastapi.staticfiles import StaticFiles
+
 
 app = FastAPI(title="Authentication Component Detector")
 
